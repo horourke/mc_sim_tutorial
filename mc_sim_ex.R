@@ -65,7 +65,7 @@ for (f in factors) {
     
     # Create the file to be written
     dgscr <- paste0(sub_path, "/", f, "_n", n, ".inp")
-    writeLines(sprintf('title:	CIE calculations for %s n=%d;
+    writeLines(sprintf('title: MZI2 sim for %s n=%d;
 montecarlo:			
 	names = x m y;
 	seed = 53487;
