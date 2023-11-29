@@ -192,8 +192,8 @@ MODEL:
     
     ## Run model scripts for all replications in subdirectory ##
     runModels(sub_path)
-  }
-}
+  } #this closes the n_values loop
+} # this closes the factors loop
   
 #############################################
 # SAVING OUTPUT ESTIMATES FOR FUTURE ANALYSES
@@ -266,7 +266,7 @@ for (f in factors) {
       up_1 <- get(output)[[filename]][["parameters"]][["ci.unstandardized"]][["up2.5"]]
       up_2 <- t(as.matrix(unlist(up_1)))
       mat_u[i, ] <- as.numeric(up_2)
-    }
+    } # this closes the reps loop
     #Create data frames from matrices
     ests <- as.data.frame(mat_ests)
     se <- as.data.frame(mat_se)
@@ -280,8 +280,8 @@ for (f in factors) {
     write.table(pval, file=paste0(sub_path, "/", file_suffix_n, "_pvals.dat"), row.names=FALSE, sep="\t", quote=FALSE)
     write.table(cilow, file=paste0(sub_path, "/", file_suffix_n, "_cis_lower.dat"), row.names=FALSE, sep="\t", quote=FALSE)
     write.table(ciup, file=paste0(sub_path, "/", file_suffix_n, "_cis_upper.dat"), row.names=FALSE, sep="\t", quote=FALSE)
-  }
-}
+  } # this closes the n_values loop
+} # this closes the factors loop
 
 ## Combine condition-level data into one dataset per outcome with all replications, for all conditions ##
 
@@ -340,9 +340,9 @@ for (f in factors) {
       cisu[row1, "n"] <- n
       # Add a row to the dataframe
       row1 <- row1 + 1
-    }
-  }
-}
+    } # this closes the reps loop
+  } # this closes the n_values loop
+} # this closes the factors loop
 
 # This splitting step is not always necessary - split the data to correctly arrange variable names
 # this must be done due to where the dispersion parameter is located in the Mplus Tech1 output for the ZINB models
