@@ -61,11 +61,9 @@ for (f in factors) {
     # Within the sprintf function, %s refers to string value (text), %d refers to digit (numeric value)
     # the final line in sprintf() gives the order of the objects that are being referred to
     
-    # Writing the data generation files  
-    
     # Create the file to be written
     dgscr <- paste0(sub_path, "/", f, "_n", n, ".inp")
-    writeLines(sprintf('title:	CIE calculations for %s n=%d;
+    writeLines(sprintf('title: MC sim example for %s n=%d;
 montecarlo:			
 	names = x m y;
 	seed = 53487;
@@ -113,7 +111,6 @@ OUTPUT: TECH9;',
     file_suffix_n <- paste0(f, "_n", n)
     # file suffix for the "list.dat" files that are created during runModels()
     file_suffix_list <- paste0(tolower(f), n, "_list")
-    file_suffix_r <- paste0(tolower(f), n, "_r")
     
     # Move data gen .inp/.out & list files to "datagen" folder before creating analysis scripts
     datagen <- paste0(filepath, "datagen")
@@ -142,7 +139,7 @@ filename = "%s_n%d_[[sample]].inp";
 outputDirectory = "%s";
 [[/init]]
 
-TITLE: CIE calculations for %s n=%d rep [[sample]];
+TITLE: MC sim example for %s n=%d rep [[sample]];
 DATA:
     File is %s%d_[[sample]].dat;
 
@@ -270,7 +267,7 @@ for (f in factors) {
       up_2 <- t(as.matrix(unlist(up_1)))
       mat_u[i, ] <- as.numeric(up_2)
     }
-    #Create data frame from last list
+    #Create data frames from matrices
     ests <- as.data.frame(mat_ests)
     se <- as.data.frame(mat_se)
     pval <- as.data.frame(mat_p)
